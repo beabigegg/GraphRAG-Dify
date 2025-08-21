@@ -2,6 +2,7 @@ from __future__ import annotations
 from typing import List, Optional, Literal, Dict, Any
 from pydantic import BaseModel, Field
 
+
 class EvidenceImage(BaseModel):
     image_id: str
     page: Optional[int] = None
@@ -9,10 +10,12 @@ class EvidenceImage(BaseModel):
     caption: Optional[str] = None
     purpose: Optional[str] = None
 
+
 class SourceRef(BaseModel):
     section_id: Optional[str] = None
     page_hint: Optional[str] = None
     rev: Optional[str] = None
+
 
 class Attribute(BaseModel):
     owner: str
@@ -23,6 +26,7 @@ class Attribute(BaseModel):
     condition: Optional[Dict[str, Any]] = None
     applies_to: Optional[str] = None
 
+
 class Entity(BaseModel):
     id: str
     type: str
@@ -30,10 +34,12 @@ class Entity(BaseModel):
     zh: Optional[str] = None
     en: Optional[str] = None
 
+
 class Relation(BaseModel):
     subject: str
     predicate: str
     object: str
+
 
 class ExtractedChunk(BaseModel):
     entities: List[Entity] = Field(default_factory=list)
@@ -43,6 +49,7 @@ class ExtractedChunk(BaseModel):
     source: SourceRef = Field(default_factory=SourceRef)
     evidence: dict = Field(default_factory=dict)  # {"images": [EvidenceImage...]}
     notes: dict = Field(default_factory=dict)
+
 
 class TextChunk(BaseModel):
     chunk_id: str

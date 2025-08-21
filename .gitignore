@@ -122,3 +122,19 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+src/main_BK2.py
+src/main_BK3.py
+src/dify/client_BK2.py
+src/dify/client_BK3.py
+src/extraction/cache_BK2.py
+src/extraction/cache_BK3.py
+extraction_cache.db
+src/extraction/pipeline_BK2.py
+src/extraction/pipeline_BK3.py
+src/extraction/prompts_NOT.py
+src/models/schema_BK.py
+src/models/schema_BK2.py
+src/models/schema_BK3.py
+src/main_BK.py
+src/dify/client_BK.py
+src/extraction/pipeline_BK.py
