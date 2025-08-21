@@ -24,7 +24,8 @@ def run_extraction(chunks: List[TextChunk], dify: DifyClient) -> List[ExtractedC
         }
         data = dify.extract(payload)
         try:
-            out.append(ExtractedChunk(**data))
+            structured_data = data.get("structured_output", data)
+            out.append(ExtractedChunk(**structured_data))
         except Exception:
             # 容錯：若返回非嚴格結構，包成 notes
             out.append(ExtractedChunk(source={"section_id": ch.section_id, "rev": ch.rev}, notes={"raw": data}))
