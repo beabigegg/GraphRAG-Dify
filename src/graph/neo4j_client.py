@@ -1,6 +1,7 @@
 from __future__ import annotations
 from typing import Dict, Any
 from neo4j import GraphDatabase
+import json
 
 class Neo4jClient:
     def __init__(self, uri: str, auth: tuple[str,str]):
@@ -37,7 +38,17 @@ def _merge_relation(tx, r: Dict[str,Any]):
     )
 
 def _attach_attribute(tx, a: Dict[str,Any]):
+    # 將嵌套的 dict 轉成 JSON 字串；空值轉成 None
+    props = {}
+    for k, v in a.items():
+        if k == "owner":
+            continue
+        if isinstance(v, dict):
+            props[k] = json.dumps(v, ensure_ascii=False)
+        else:
+            # 將空字串統一為 None，以免出現其他類型問題
+            props[k] = v if v not in ("", None) else None
     tx.run(
         "MATCH (e:Entity {id:$owner}) SET e += $props",
-        owner=a["owner"], props={k:v for k,v in a.items() if k not in {"owner"}}
+        owner=a["owner"], props=props
     )
