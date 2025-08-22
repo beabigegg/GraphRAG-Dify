@@ -138,3 +138,6 @@ src/models/schema_BK3.py
 src/main_BK.py
 src/dify/client_BK.py
 src/extraction/pipeline_BK.py
+src/graph/neo4j_client_BK.py
+src/main_BK4.py
+src/models/schema_BK4.py
